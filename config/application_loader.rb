@@ -5,6 +5,7 @@ module ApplicationLoader
     init_settings
     init_db
     check_migrations
+    require_lib
     require_app
     init_app
   end
@@ -28,8 +29,13 @@ module ApplicationLoader
     require_dir 'config/initializers'
   end
 
+  def require_lib
+    require_dir 'lib/'
+  end
+
   def require_app
     require_file 'config/application'
+    require_dir 'app/'
   end
 
   def require_file(path)

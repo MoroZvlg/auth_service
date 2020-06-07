@@ -10,6 +10,8 @@ gem 'sinatra-contrib'
 
 
 gem 'sequel'
+gem 'sequel-seed'
+gem 'bcrypt', require: false
 gem 'pg'
 
 gem 'i18n'
