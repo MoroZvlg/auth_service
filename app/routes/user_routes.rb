@@ -32,7 +32,7 @@ class UserRoutes < Application
           json succes: true
         else
           status 422
-          error_response(result.user)
+          error_response(result.session || result.errors)
         end
       end
     end

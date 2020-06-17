@@ -31,8 +31,8 @@ Sequel.migration do
       
       primary_key [:uuid]
       
-      index [:user_id], :name=>:index_user_sessions_on_user_id, :unique=>true
-      index [:uuid], :name=>:index_user_sessions_on_uuid, :unique=>true
+      index [:user_id], :name=>:index_user_sessions_on_user_id
+      index [:uuid], :name=>:index_user_sessions_on_uuid
     end
   end
 end
