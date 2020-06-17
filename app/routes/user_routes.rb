@@ -2,6 +2,7 @@ class UserRoutes < Application
 
   namespace '/v1' do
     post '/sign_up' do
+      pp params
       user_params = validate_with(NewUserContract)
       if user_params.failure?
         status 422
@@ -16,7 +17,6 @@ class UserRoutes < Application
           error_response(result.user)
         end
       end
-
     end
 
     post '/sign_in' do
