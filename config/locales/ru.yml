@@ -3,3 +3,11 @@ ru:
     user_sessions:
       create_service:
         unauthorized: Неверный email или пароль
+  contracts:
+    wrong_email_format: Неверный формат email
+    passwords_not_match: Пароли не совпадают
+  api:
+    errors:
+      not_found: Запись не найдена
+      not_unique: Такая запись уже существует
+      missing_parameters: Отсутствует параметр

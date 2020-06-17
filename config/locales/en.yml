@@ -3,3 +3,11 @@ en:
     user_sessions:
       create_service:
         unauthorized: Wrong email or password
+  contracts:
+    wrong_email_format: Wrong email format
+    passwords_not_match: Passwords don't match
+  api:
+    errors:
+      not_found: Record not found
+      not_unique: Record not unique
+      missing_parameters: Parameter missing

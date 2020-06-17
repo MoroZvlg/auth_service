@@ -8,12 +8,12 @@ class NewUserContract < Dry::Validation::Contract
 
   rule(:email) do
     unless /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.match?(value)
-      key.failure('has invalid format')
+      key.failure(I18n.t(:wrong_email_format, scope: 'contracts'))
     end
   end
 
   rule(:password, :password_confirmation) do
-    key.failure('Passwords not match') if values[:password_confirmation] != values[:password]
+    key.failure(I18n.t(:passwords_not_match, scope: 'contracts')) if values[:password_confirmation] != values[:password]
   end
 
 end

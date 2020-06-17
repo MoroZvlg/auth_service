@@ -6,7 +6,7 @@ class SignInContract < Dry::Validation::Contract
 
   rule(:email) do
     unless /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.match?(value)
-      key.failure('has invalid format')
+      key.failure(I18n.t(:wrong_email_format, scope: 'contracts'))
     end
   end
 
