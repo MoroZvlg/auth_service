@@ -34,7 +34,9 @@ module ApplicationLoader
   end
 
   def require_app
+    require_dir 'app/helpers'
     require_file 'config/application'
+    require_dir 'app/', pattern: "application*.rb"
     require_dir 'app/'
   end
 
@@ -42,9 +44,9 @@ module ApplicationLoader
     require File.join(root, path)
   end
 
-  def require_dir(path)
+  def require_dir(path, pattern: "*.rb")
     path = File.join(root, path)
-    Dir["#{path}**/*.rb"].each {|file| require file }
+    Dir["#{path}**/#{pattern}"].each {|file| require file }
   end
 
   def root

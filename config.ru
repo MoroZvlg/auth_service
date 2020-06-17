@@ -1,3 +1,5 @@
 require_relative './config/environment'
 
-run Application
+map '/auth' do
+  run UserRoutes
+end
