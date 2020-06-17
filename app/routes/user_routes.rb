@@ -10,6 +10,7 @@ class UserRoutes < Application
         result = Users::CreateService.call(user_params: user_params.to_h)
         if result.success?
           status 201
+          json succes: true
         else
           status 422
           error_response(result.user)
@@ -18,9 +19,22 @@ class UserRoutes < Application
 
     end
 
-    post 'sign_in' do
+    post '/sign_in' do
+      user_params = validate_with(SignInContract)
+      if user_params.failure?
+        status 422
+        error_response(user_params.errors.to_h)
+      else
+        result = UserSessions::CreateService.call(user_params: user_params.to_h)
 
+        if result.success?
+          status 201
+          json succes: true
+        else
+          status 422
+          error_response(result.user)
+        end
+      end
     end
   end
-
 end

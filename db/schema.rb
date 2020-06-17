@@ -22,5 +22,17 @@ Sequel.migration do
       
       index [:email], :name=>:index_users_on_email, :unique=>true
     end
+    
+    create_table(:user_sessions, :ignore_index_errors=>true) do
+      String :uuid, :null=>false
+      foreign_key :user_id, :users, :null=>false, :key=>[:id]
+      DateTime :created_at, :size=>6, :null=>false
+      DateTime :updated_at, :size=>6, :null=>false
+      
+      primary_key [:uuid]
+      
+      index [:user_id], :name=>:index_user_sessions_on_user_id, :unique=>true
+      index [:uuid], :name=>:index_user_sessions_on_uuid, :unique=>true
+    end
   end
 end
