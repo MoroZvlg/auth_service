@@ -9,13 +9,18 @@ RSpec.describe UserRoutes, type: :request do
     end
 
     context 'invalid parameters' do
+      let(:user_params) {{
+          name: 'b.o.b',
+          email: 'bob@example.com',
+          password: 'givemeatoken',
+      }}
       it 'returns an error' do
-        post 'v1/sign_up', params: { name: 'b.o.b', email: 'bob@example.com', password: 'givemeatoken' }
+        post 'v1/sign_up', user_params
 
         expect(last_response.status).to eq(422)
         expect(response_body['errors']).to include(
                                                {
-                                                   'detail' => 'Укажите имя, используя буквы, цифры или символ подчёркивания',
+                                                   'detail' => I18n.t(:wrong_name_format, scope: 'contracts'),
                                                    'source' => {
                                                        'pointer' => '/data/attributes/name'
                                                    }
@@ -25,10 +30,15 @@ RSpec.describe UserRoutes, type: :request do
     end
 
     context 'valid parameters' do
+      let(:user_params) {{
+          name: 'bob',
+          email: 'bob@example.com',
+          password: 'givemeatoken',
+      }}
       it 'returns created status' do
-        post 'v1/sign_up', params: { name: 'bob', email: 'bob@example.com', password: 'givemeatoken', password_confirmation: 'givemeatoken'}
-        pp response_body
+        post 'v1/sign_up', user_params
 
+        pp response_body
         expect(last_response.status).to eq(201)
       end
     end

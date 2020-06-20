@@ -25,6 +25,10 @@ module PasswordEncryptor
       end
     end
 
+    def values
+      super.merge(password: password).except(:password_digest)
+    end
+
     def authenticate!(unencrypted)
       authenticate(unencrypted) || raise_wrong_password
     end
