@@ -15,7 +15,7 @@ class UserRoutes < Application
     end
 
     post '/sign_in' do
-      user_params = validate_with!(PermitParams::NewUser)
+      user_params = validate_with!(PermitParams::User)
 
       result = UserSessions::CreateService.call(user_params: user_params.to_h)
 
@@ -23,7 +23,7 @@ class UserRoutes < Application
         status 201
         json succes: true
       else
-        status 422
+        status 401
         error_response(result.session || result.errors)
       end
     end

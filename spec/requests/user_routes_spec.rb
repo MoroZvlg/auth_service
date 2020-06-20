@@ -2,7 +2,7 @@ RSpec.describe UserRoutes, type: :request do
   describe 'POST /sign_up' do
     context 'missing parameters' do
       it 'returns an error' do
-        post 'v1/sign_up', params: { name: 'bob', email: 'bob@example.com', password: '' }
+        post 'v1/sign_up', params: {name: 'bob', email: 'bob@example.com', password: ''}
 
         expect(last_response.status).to eq(422)
       end
@@ -38,8 +38,50 @@ RSpec.describe UserRoutes, type: :request do
       it 'returns created status' do
         post 'v1/sign_up', user_params
 
-        pp response_body
         expect(last_response.status).to eq(201)
+      end
+    end
+  end
+
+  describe 'POST /sign_in' do
+    context 'missing parameters' do
+      let(:params) {{email: 'bob@example.com',
+                     password: ''}}
+      it 'returns an error' do
+        post 'v1/sign_in', params
+
+        expect(last_response.status).to eq(422)
+      end
+    end
+
+    context 'invalid parameters' do
+      let(:params) {{email: 'bob@example.com',
+                     password: 'invalid'}}
+      it 'returns an error' do
+
+        post 'v1/sign_in', params
+
+        expect(last_response.status).to eq(401)
+        expect(response_body['errors']).to include('detail' => I18n.t(:unauthorized, scope: 'services.user_sessions.create_service'))
+      end
+    end
+
+    context 'valid parameters' do
+      let(:token) {'jwt_token'}
+      let(:params) {{email: 'bob@example.com',
+                     password: 'givemeatoken'}}
+
+      before do
+        FactoryBot.create(:user, email: 'bob@example.com', password: 'givemeatoken')
+
+        # allow(JWT).to receive(:encode).and_return(token)
+      end
+
+      it 'returns created status' do
+        post 'v1/sign_in', params
+
+        expect(last_response.status).to eq(201)
+        expect(response_body['meta']).to eq('token' => token)
       end
     end
   end
