@@ -74,7 +74,7 @@ RSpec.describe UserRoutes, type: :request do
       before do
         FactoryBot.create(:user, email: 'bob@example.com', password: 'givemeatoken')
 
-        # allow(JWT).to receive(:encode).and_return(token)
+        allow(JWT).to receive(:encode).and_return(token)
       end
 
       it 'returns created status' do

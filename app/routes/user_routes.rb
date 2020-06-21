@@ -20,8 +20,10 @@ class UserRoutes < Application
       result = UserSessions::CreateService.call(user_params: user_params.to_h)
 
       if result.success?
+        token = JwtEncoder.encode(uuid: result.session.uuid)
+
         status 201
-        json succes: true
+        json meta: { token: token }
       else
         status 401
         error_response(result.session || result.errors)

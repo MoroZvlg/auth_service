@@ -12,6 +12,7 @@ gem 'sinatra-contrib'
 gem 'sequel'
 gem 'sequel-seed'
 gem 'bcrypt', require: false
+gem 'jwt'
 gem 'pg'
 
 gem 'i18n'
