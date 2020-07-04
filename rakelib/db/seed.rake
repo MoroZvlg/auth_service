@@ -7,13 +7,9 @@ namespace :db do
 
     Sequel.connect(Settings.db.to_hash) do |db|
       Sequel.extension :seed
-      env = ENV['RACK_ENV'] ||= 'development'
-      Sequel::Seed.setup(env.to_sym)
+      Sequel::Seed.setup(ENV['RACK_ENV'].to_sym)
 
       Sequel::Seeder.apply(db, "db/seeds")
     end
-
-    Rake::Task['db:generate_schema'].execute
   end
-
 end
