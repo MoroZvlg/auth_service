@@ -1,0 +1,6 @@
+ru:
+  dry_validation:
+    errors:
+      rules:
+        password:
+          filled?: 'Пароль не может быть пустым'
