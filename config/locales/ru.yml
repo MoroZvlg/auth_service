@@ -3,6 +3,9 @@ ru:
     user_sessions:
       create_service:
         unauthorized: Неверный email или пароль
+    auth:
+      fetch_user_service:
+        forbidden: Доступ к ресурсу ограничен
   contracts:
     wrong_email_format: Неверный формат email
     wrong_name_format: Укажите имя, используя буквы, цифры или символ подчёркивания

@@ -3,6 +3,9 @@ en:
     user_sessions:
       create_service:
         unauthorized: Wrong email or password
+    auth:
+      fetch_user_service:
+        forbidden: Forbidden
   contracts:
     wrong_email_format: Wrong email format
     wrong_name_format: User letters, numbers or underscore for name

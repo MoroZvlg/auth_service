@@ -10,7 +10,7 @@ class UserRoutes < Application
         json succes: true
       else
         status 422
-        error_response(result.user)
+        error_response(result.user || result.errors)
       end
     end
 
@@ -29,5 +29,18 @@ class UserRoutes < Application
         error_response(result.session || result.errors)
       end
     end
+
+    post '/auth' do
+      result = Auth::FetchUserService.call(extracted_token['uuid'])
+
+      if result.success?
+        status 201
+        json  meta: { user_id: result.user.id }
+      else
+        status 422
+        error_response(result.user || result.errors)
+      end
+    end
+
   end
 end

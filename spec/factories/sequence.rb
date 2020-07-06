@@ -6,4 +6,8 @@ FactoryBot.define do
   sequence(:email) do |n|
     "email-#{n}@example.com"
   end
+
+  sequence(:uuid) do |n|
+    SecureRandom.uuid
+  end
 end
