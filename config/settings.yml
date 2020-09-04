@@ -5,3 +5,5 @@ db:
   adapter: postgresql
 application:
   jwt_secure_code: random_key
+rabbit:
+  pool_size: 10

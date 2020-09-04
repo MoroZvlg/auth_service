@@ -15,6 +15,8 @@ gem 'bcrypt', require: false
 gem 'jwt'
 gem 'pg'
 
+gem 'bunny'
+
 gem 'i18n'
 gem 'config'
 
