@@ -5,3 +5,7 @@ db:
   adapter: postgresql
 application:
   jwt_secure_code: random_key
+  name: auth
+logger:
+  path: log/app.log
+  level: info

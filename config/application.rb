@@ -2,6 +2,10 @@ class Application < Sinatra::Base
   helpers Validations
   helpers Auth
 
+  before do
+    Thread.current[:request_id] ||= request.env["HTTP_X_REQUEST_ID"]
+  end
+
   configure do
     register Sinatra::Namespace
     register ApiErrors
