@@ -1,6 +1,7 @@
 db:
-  database: auth_microservice
+  database: auth_microservice_production
   host: localhost
   port: 5432
   adapter: postgresql
   user: postgres
+  url: <%= ENV.fetch('AUTH_DATABASE_URL') %>
