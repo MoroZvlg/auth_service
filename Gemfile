@@ -21,6 +21,8 @@ gem 'config'
 gem 'fast_jsonapi'
 gem 'activesupport', require: false
 
+gem 'prometheus-client'
+
 gem 'rack-ougai'
 gem 'amazing_print' # нужен для ouagi!
 
